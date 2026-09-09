@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🎯 Smart Recruitment Assistant")
+st.title(" Smart Recruitment Assistant")
 st.markdown("### Predict if a candidate should advance to the next stage")
 
 # ============================================
@@ -30,15 +30,15 @@ def load_model():
     try:
         model = joblib.load('best_model_v2.pkl')
         preprocessor = joblib.load('preprocessor_v2.pkl')
-        st.success("✅ Model v2 loaded successfully!")
+        st.success(" Model v2 loaded successfully!")
         return model, preprocessor, True
     except Exception as e:
-        st.warning(f"⚠️ Could not load v2 model: {str(e)}")
+        st.warning(f" Could not load v2 model: {str(e)}")
     
     # Try loading model only (old version)
     try:
         model = joblib.load('best_model.pkl')
-        st.success("✅ Model loaded successfully!")
+        st.success(" Model loaded successfully!")
         return model, None, False
     except:
         pass
@@ -47,13 +47,13 @@ def load_model():
     try:
         with open('best_model.pickle', 'rb') as f:
             model = pickle.load(f)
-        st.success("✅ Model loaded successfully using pickle!")
+        st.success(" Model loaded successfully using pickle!")
         return model, None, False
     except Exception as e:
-        st.error(f"❌ Model not found!\nError: {str(e)}")
+        st.error(f" Model not found!\nError: {str(e)}")
         
         # Show available files
-        st.write("📁 Files in current directory:")
+        st.write(" Files in current directory:")
         for file in os.listdir():
             st.write(f"  - {file}")
         return None, None, False
@@ -88,7 +88,7 @@ if is_v2:
 # ============================================
 if model is not None:
     with st.form("candidate_form"):
-        st.subheader("📝 Candidate Information")
+        st.subheader(" Candidate Information")
         
         col1, col2 = st.columns(2)
         
@@ -112,7 +112,7 @@ if model is not None:
                 ['Junior (0-2 years)', 'Mid (3-5 years)', 'Senior (6-10 years)', 'Expert (10+ years)', 'Unknown']
             )
         
-        submitted = st.form_submit_button("🔮 Predict", use_container_width=True)
+        submitted = st.form_submit_button(" Predict", use_container_width=True)
     
     # ============================================
     # PREDICTION
@@ -185,14 +185,14 @@ if model is not None:
             # ============================================
             # DISPLAY RESULTS
             # ============================================
-            st.subheader("📊 Prediction Results")
+            st.subheader(" Prediction Results")
             
             col1, col2, col3 = st.columns(3)
             
             with col1:
                 st.metric(
                     label="Prediction",
-                    value="✅ Advance" if prediction == 1 else "❌ Do Not Advance"
+                    value=" Advance" if prediction == 1 else " Do Not Advance"
                 )
             
             with col2:
@@ -213,16 +213,16 @@ if model is not None:
             
             # Recommendation message
             if prediction == 1:
-                st.success(f"✅ This candidate is recommended to advance with {probability:.1%} confidence.")
+                st.success(f" This candidate is recommended to advance with {probability:.1%} confidence.")
             else:
-                st.warning(f"⚠️ This candidate is not recommended to advance.")
+                st.warning(f" This candidate is not recommended to advance.")
             
             # Show input summary
-            with st.expander("📋 View Input Summary"):
+            with st.expander(" View Input Summary"):
                 st.dataframe(input_df)
                 
         except Exception as e:
-            st.error(f"❌ Error making prediction: {str(e)}")
+            st.error(f" Error making prediction: {str(e)}")
             st.info("Please check that all inputs are filled correctly.")
             
             # Debug info
@@ -239,7 +239,7 @@ if model is not None:
     # ============================================
     # TOP 10 CANDIDATES
     # ============================================
-    st.header("🏆 Top 10 Recommended Candidates")
+    st.header(" Top 10 Recommended Candidates")
     
     # Try loading v2 first
     try:
@@ -263,7 +263,7 @@ if model is not None:
 st.markdown("---")
 st.markdown("""
     <div style='text-align: center; color: gray; padding: 20px;'>
-        Made with ❤️ using Streamlit | Smart Recruitment Assistant v2
+        Made using Streamlit | Smart Recruitment Assistant v2
     </div>
 """, unsafe_allow_html=True)
 
@@ -271,7 +271,7 @@ st.markdown("""
 # SIDEBAR - INFORMATION
 # ============================================
 with st.sidebar:
-    st.header("ℹ️ About")
+    st.header(" About")
     st.markdown("""
     ### Smart Recruitment Assistant
     
